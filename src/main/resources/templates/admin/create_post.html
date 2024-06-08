@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{admin/header.html :: header}"></div>
+
+<body>
+    <div th:replace="~{admin/header.html :: navbar}"></div>
+    <br><br>
+    <div class="container">
+        <div class="row col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Create Post</h2>
+                </div>
+
+                <div class="card-body">
+                    <form role="form" method="post" th:action="@{/admin/posts}" th:object="${post}">
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Enter Post Title Here"
+                                name="title" th:field="*{title}">
+                        </div>
+                        <!-- Short Description -->
+                        <div class="mb-3">
+                            <label for="shortDescription" class="form-label">Title</label>
+                            <textarea class="form-control" id="shortDescription"
+                                placeholder="Enter Post Short Description Here" rows="3" name="shortDescription"
+                                th:field="*{shortDescription}">
+                            </textarea>
+                        </div>
+                        <!-- Content -->
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea class="form-control" id="content" placeholder="Enter Post Content Here" rows="12"
+                                name="content" th:field="*{content}">
+                            </textarea>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <div th:replace="~{admin/footer.html :: footer}"></div>
+</body>
+
+</html>
