@@ -21,6 +21,6 @@ public class PostController {
         List<PostDto> posts = postService.findAllPosts();
         model.addAttribute("posts", posts);
 
-        return "/admin/posts";
+        return "admin/posts";
     }
 }
