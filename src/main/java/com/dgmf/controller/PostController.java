@@ -23,4 +23,14 @@ public class PostController {
 
         return "admin/posts";
     }
+
+    // Handler Method for New Post Request
+    @GetMapping("/admin/posts/newpost")
+    public String newPostForm(Model model) {
+        // Empty Post DTO
+        PostDto postDto = new PostDto();
+        model.addAttribute("post", postDto);
+
+        return "admin/create_post";
+    }
 }
