@@ -30,4 +30,16 @@ public class PostServiceImpl implements PostService {
         Post post = PostMapper.mapToPost(postDto);
         postRepository.save(post);
     }
+
+    @Override
+    public PostDto findPostById(Long postDtoId) {
+        Post post = postRepository.findById(postDtoId)
+                .orElseThrow(
+                        () -> new RuntimeException(
+                                "Post Not Found with the Given Id : " + postDtoId
+                        )
+                );
+
+        return PostMapper.mapToPostDto(post);
+    }
 }
