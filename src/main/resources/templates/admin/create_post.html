@@ -29,7 +29,8 @@
                                 placeholder="Enter Post Short Description Here" rows="3" name="shortDescription"
                                 th:field="*{shortDescription}">
                             </textarea>
-                            <p th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}" class="text-danger"></p>
+                            <p th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}"
+                                class="text-danger"></p>
                         </div>
                         <!-- Content -->
                         <div class="mb-3">
@@ -47,8 +48,24 @@
             </div>
         </div>
     </div>
-    <br><br><br>
+    <br><br><br><br><br><br>
     <div th:replace="~{admin/footer.html :: footer}"></div>
+
+    <!-- CKEditor 5 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script>
+        // Instance of CKEditor 5
+        ClassicEditor 
+            .create(document.querySelector('#content')) // Id of the Textarea Above
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 </body>
 
 </html>
