@@ -27,7 +27,9 @@
                     <td th:text="${post.title}">Title</td>
                     <td th:text="${post.shortDescription}">Short Description</td>
                     <td th:text="${post.createdOn}">Created On</td>
-                    <td>1</td>
+                    <td>
+                        <a th:href="@{/admin/posts/{postId}/edit(postId=${post.id})}" class="btn btn-primary">Edit</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
