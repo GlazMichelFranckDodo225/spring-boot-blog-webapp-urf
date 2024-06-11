@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{admin/header.html :: header}"></div>
+
+<body>
+    <div th:replace="~{admin/header.html :: navbar}"></div>
+    <br><br>
+    <div class="container">
+        <div class="row col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Edit Post</h2>
+                </div>
+
+                <div class="card-body">
+                    <form role="form" method="post" th:action="@{/admin/posts}" th:object="${post}">
+                        <!-- Hidden Data -->
+                         <input type="hidden" th:field="*{id}">
+                         <input type="hidden" th:field="*{url}">
+                         <input type="hidden" th:field="*{createdOn}">
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Enter Post Title Here"
+                                name="title" th:field="*{title}">
+                            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></p>
+                        </div>
+                        <!-- Short Description -->
+                        <div class="mb-3">
+                            <label for="shortDescription" class="form-label">Short Description</label>
+                            <textarea class="form-control" id="shortDescription"
+                                placeholder="Enter Post Short Description Here" rows="3" name="shortDescription"
+                                th:field="*{shortDescription}">
+                            </textarea>
+                            <p th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}"
+                                class="text-danger"></p>
+                        </div>
+                        <!-- Content -->
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea class="form-control" id="content" placeholder="Enter Post Content Here" rows="12"
+                                name="content" th:field="*{content}">
+                            </textarea>
+                            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></p>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br>
+    <div th:replace="~{admin/footer.html :: footer}"></div>
+
+    <!-- CKEditor 5 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script>
+        // Instance of CKEditor 5
+        ClassicEditor 
+            .create(document.querySelector('#content')) // Id of the Textarea Above
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+</body>
+
+</html>
