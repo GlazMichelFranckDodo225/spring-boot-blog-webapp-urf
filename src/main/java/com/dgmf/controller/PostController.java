@@ -44,7 +44,7 @@ public class PostController {
     public String createPost(
             // @ModelAttribute ==> Read Form Data and Set the Values to
             // the Fields of the Model Object
-            @Valid @ModelAttribute("post") PostDto postDto,
+            @Valid @ModelAttribute("post") PostDto post,
             // Using Binding Result Class from Spring MVC to
             // Check Errors and Return the UI
             BindingResult result,
@@ -54,12 +54,21 @@ public class PostController {
         if(result.hasErrors()) {
             // Add "postDto" to the Model and Return the "New Post" UI to
             // Retry Operations
-            model.addAttribute("post", postDto);
+            model.addAttribute("post", post);
             return "admin/create_post";
         }
-        postDto.setUrl(getUrl(postDto.getTitle()));
-        postService.createPost(postDto);
+        post.setUrl(getUrl(post.getTitle()));
+        postService.createPost(post);
         return "redirect:/admin/posts";
+    }
+
+    private static String getUrl(String postTitle) {
+        // OOPs Concepts Explained in Java ==> oops-concepts-explained-in-java
+        String title = postTitle.trim().toLowerCase();
+        String url = title.replaceAll("\\s+", "-");
+        url = url.replaceAll("[^A-Za-z0-9]", "-");
+
+        return url;
     }
 
     // Handler Method for Edit Post Request
@@ -76,12 +85,24 @@ public class PostController {
         return "admin/edit_post";
     }
 
-    private static String getUrl(String postTitle) {
-        // OOPs Concepts Explained in Java ==> oops-concepts-explained-in-java
-        String title = postTitle.trim().toLowerCase();
-        String url = title.replaceAll("\\s+", "-");
-        url = url.replaceAll("[^A-Za-z0-9]", "-");
-
-        return url;
+    // Handler Method for Edit Post Form Submit Request
+    @PostMapping("/admin/posts/{postId}")
+    public String updatePost(
+            @PathVariable("postId") Long postId,
+            @Valid @ModelAttribute("post") PostDto post,
+            BindingResult result,
+            Model model
+    ) {
+        // If there is Any Error While Form Submission ==> Return "true"
+        if(result.hasErrors()) {
+            // Add "postDto" to the Model and Return the "New Post" UI to
+            // Retry Operations
+            model.addAttribute("post", post);
+            return "admin/edit_post";
+        }
+        post.setId(postId);
+        postService.updatePost(post);
+        return "redirect:/admin/posts";
     }
+
 }

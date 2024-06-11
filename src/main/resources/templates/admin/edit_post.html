@@ -14,9 +14,8 @@
                 </div>
 
                 <div class="card-body">
-                    <form role="form" method="post" th:action="@{/admin/posts}" th:object="${post}">
+                    <form role="form" method="post" th:action="@{/admin/posts/{postId}(postId=${post.id})}" th:object="${post}">
                         <!-- Hidden Data -->
-                         <input type="hidden" th:field="*{id}">
                          <input type="hidden" th:field="*{url}">
                          <input type="hidden" th:field="*{createdOn}">
                         <!-- Title -->
