@@ -60,4 +60,16 @@ public class PostServiceImpl implements PostService {
 
         postRepository.delete(post);
     }
+
+    @Override
+    public PostDto findPostByUrl(String postUrl) {
+        Post post = postRepository.findByUrl(postUrl)
+                .orElseThrow(
+                        () -> new RuntimeException(
+                                "Post Not Found with the Given Url : " + postUrl
+                        )
+                );
+
+        return PostMapper.mapToPostDto(post);
+    }
 }

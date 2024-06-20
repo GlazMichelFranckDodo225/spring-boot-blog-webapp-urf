@@ -110,4 +110,13 @@ public class PostController {
         return "redirect:/admin/posts";
     }
 
+    // Handler Method for View Post Request
+    @GetMapping("/admin/posts/{postUrl}/view")
+    public String viewPost(@PathVariable("postUrl") String postUrl, Model model) {
+        PostDto postDto = postService.findPostByUrl(postUrl);
+        model.addAttribute("post", postDto);
+
+        return "admin/view_post";
+    }
+
 }
