@@ -119,4 +119,17 @@ public class PostController {
         return "admin/view_post";
     }
 
+    // Handler Method for Search Blog Post Request
+    // localhost:8080/admin/posts/search?query=java
+    @GetMapping("/admin/posts/search")
+    public String searchPosts(
+            @RequestParam(value = "query") String query,
+            Model model
+    ) {
+        List<PostDto> posts = postService.searchPosts(query);
+        model.addAttribute("posts", posts);
+
+        return "admin/posts/";
+    }
+
 }
