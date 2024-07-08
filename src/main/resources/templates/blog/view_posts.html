@@ -15,19 +15,14 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>
-                                <a 
-                                    th:href="@{/post/{postUrl}(postUrl=${post.url})}"
-                                    th:text="${post.title}"
-                                ></a>
+                                <a th:href="@{/post/{postUrl}(postUrl=${post.url})}" th:text="${post.title}"></a>
                             </h3>
                             <div><strong th:text="${#temporals.format(post.createdOn, 'dd MMM yyyy')}"></strong></div>
                         </div>
                         <div class="card-body">
                             <span th:utext="${post.shortDescription}"></span>
-                            <a 
-                                th:href="@{/post/{postUrl}(postUrl=${post.url})}"
-                                th:text="${post.title}"
-                            >Read more ...</a>
+                            <a th:href="@{/post/{postUrl}(postUrl=${post.url})}" th:text="${post.title}">Read more
+                                ...</a>
                         </div>
                     </div>
                     <br>
@@ -35,6 +30,7 @@
             </div>
             <div class="col-md-3">
                 <!-- Search Bar -->
+                <div th:replace="~{blog/search.html :: search}"></div>
             </div>
         </div>
     </div>
@@ -42,4 +38,5 @@
     <div th:replace="~{blog/footer.html :: footer}"></div>
     <!-- <div th:replace="~{admin/footer.html :: footer}"></div> -->
 </body>
+
 </html>
