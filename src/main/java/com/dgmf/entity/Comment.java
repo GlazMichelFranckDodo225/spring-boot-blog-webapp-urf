@@ -9,30 +9,28 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "comments")
+public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String title;
-    private String url;
+    private String name;
+    @Column(nullable = false)
+    private String email;
     // @Lob
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String content;
-    private String shortDescription;
-    // Hibernate will automatically take the
-    // current Timestamp of the JVM
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp
     private LocalDateTime updatedOn;
     // Bidirectional Mapping Between Post and Comment
     // Post ==> Parent/Owner / Comment ==> Child
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private Set<Comment> comments = new HashSet<>();
+    @ManyToOne
+    // Foreign Key in the Comment Table
+    @JoinColumn(name = "post_id", nullable = false)
+    private Post post;
 }
