@@ -5,28 +5,93 @@
 <!-- <div th:replace="~{blog/header.html :: header}"></div> -->
 
 <body>
-    <div th:replace="~{blog/header.html :: navbar}"></div>
-    <!-- <div th:replace="~{blog/header.html :: navbar}"></div> -->
+<div th:replace="~{blog/header.html :: navbar}"></div>
+<!-- <div th:replace="~{blog/header.html :: navbar}"></div> -->
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <h2 th:text="${post.title}"></h2>
+            <hr>
+            <h4 th:text="${post.shortDescription}"></h4>
+            <hr>
+            <div th:utext="${post.content}"></div>
+            <hr>
+            <!-- Comment Form -->
+            <div>
+                <h3>Comment : </h3>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Leave a Comment :</h2>
+                    </div>
+                    <div class="card-body">
+                        <form
+                                role="form"
+                                method="post"
+                                th:action="@{/{postUrl}/comments(postUrl=${post.url})}"
+                                th:object="${comment}"
+                        >
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <input
+                                            class="form-control"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Enter Your Name Here"
+                                            th:field="*{name}"
+                                            type="text"
+                                    >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <input
+                                            class="form-control"
+                                            id="email"
+                                            name="email"
+                                            placeholder="Enter Your Email Address Here"
+                                            th:field="*{email}"
+                                            type="text"
+                                    >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 mb-3">
+                                    <textarea
+                                            class="form-control"
+                                            id="content"
+                                            name="content"
+                                            placeholder="Enter Your Comment Here"
+                                            rows="8"
+                                            th:field="*{content}"
+                                    >
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <h2 th:text="${post.title}"></h2>
-                <hr>
-                <h4 th:text="${post.shortDescription}"></h4>
-                <hr>
-                <div th:utext="${post.content}"></div>
-            </div>
-            <div class="col-md-3">
-                <!-- Search Bar -->
-                <div th:replace="~{blog/search.html :: search}"></div>
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <button class="btn btn-primary" type="submit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
+        <div class="col-md-3">
+            <!-- Search Bar -->
+            <div th:replace="~{blog/search.html :: search}"></div>
+        </div>
+    </div>
     <br><br><br><br><br><br>
-    <div th:replace="~{blog/footer.html :: footer}"></div>
-    <!-- <div th:replace="~{blog/footer.html :: footer}"></div> -->
+</div>
+
+<div th:replace="~{blog/footer.html :: footer}"></div>
+<!-- <div th:replace="~{blog/footer.html :: footer}"></div> -->
 </body>
 
 </html>

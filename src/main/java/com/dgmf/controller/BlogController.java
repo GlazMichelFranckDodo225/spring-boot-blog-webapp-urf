@@ -1,5 +1,6 @@
 package com.dgmf.controller;
 
+import com.dgmf.dto.CommentDto;
 import com.dgmf.dto.PostDto;
 import com.dgmf.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,10 @@ public class BlogController {
     public String showPost(@PathVariable("postUrl") String postUrl, Model model) {
         PostDto post = postService.findPostByUrl(postUrl);
         model.addAttribute("post", post);
+
+        // Add Empty CommentDto Object to Model
+        CommentDto commentDto = new CommentDto();
+        model.addAttribute("comment", commentDto);
 
         return "blog/blog_post";
     }
