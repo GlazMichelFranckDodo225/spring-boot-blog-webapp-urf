@@ -22,10 +22,10 @@ public class CommentController {
     // Handler Method to Create Form Submit Request
     @PostMapping("/{postUrl}/comments")
     public String createComment(
-            @Valid @PathVariable("postUrl") String postUrl,
-            @ModelAttribute("comment") CommentDto commentDto,
-            Model model,
-            BindingResult result
+            @PathVariable("postUrl") String postUrl,
+            @Valid @ModelAttribute("comment") CommentDto commentDto,
+            BindingResult result,
+            Model model
     ) {
         PostDto postDto = postService.findPostByUrl(postUrl);
 

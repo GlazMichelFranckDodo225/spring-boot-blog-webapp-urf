@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class CommentDto {
     private Long id;
-    @NotEmpty
+    @NotEmpty(message = "The Field of the Name Should Not Be Empty or Null")
     private String name;
-    @NotEmpty(message = "Email Should Not Be Empty or Null")
+    @NotEmpty(message = "The Field of the Email Should Not Be Empty or Null")
     @Email
     private String email;
-    @NotEmpty(message = "Message Body Should Not Be Empty")
+    @NotEmpty(message = "The Body of the Message Should Not Be Empty")
     private String content;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
