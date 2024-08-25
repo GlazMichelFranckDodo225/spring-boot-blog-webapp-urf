@@ -2,6 +2,7 @@ package com.dgmf.controller;
 
 import com.dgmf.dto.CommentDto;
 import com.dgmf.service.CommentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,7 @@ public class CommentController {
     // Handler Method to Create Form Submit Request
     @PostMapping("/{postUrl}/comments")
     public String createComment(
-            @PathVariable("postUrl") String postUrl,
+            @Valid @PathVariable("postUrl") String postUrl,
             @ModelAttribute("comment") CommentDto commentDto,
             Model model
     ) {
