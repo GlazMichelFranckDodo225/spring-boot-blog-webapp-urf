@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class PostDto {
@@ -24,6 +25,8 @@ public class PostDto {
     // Custom Message
     @NotEmpty(message = "Post Short Description Should Not Be Empty")
     private String shortDescription;
+    private Set<CommentDto> comments;
+
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }

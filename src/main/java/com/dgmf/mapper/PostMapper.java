@@ -3,6 +3,8 @@ package com.dgmf.mapper;
 import com.dgmf.dto.PostDto;
 import com.dgmf.entity.Post;
 
+import java.util.stream.Collectors;
+
 public class PostMapper {
     // Convert Post Entity to Post DTO
     public static PostDto mapToPostDto(Post post) {
@@ -12,6 +14,11 @@ public class PostMapper {
                 .url(post.getUrl())
                 .content(post.getContent())
                 .shortDescription(post.getShortDescription())
+                .comments(
+                        post.getComments().stream().map(
+                                CommentMapper::mapToCommentDto
+                        ).collect(Collectors.toSet())
+                )
                 .createdOn(post.getCreatedOn())
                 .updatedOn(post.getUpdatedOn())
                 .build();
