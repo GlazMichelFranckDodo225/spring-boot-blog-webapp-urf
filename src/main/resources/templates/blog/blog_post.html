@@ -19,7 +19,16 @@
                 <hr>
                 <!-- Comment Form -->
                 <div>
-                    <h3>Comment : </h3>
+                    <h3>Comments : </h3>
+                    <div th:each="comment : ${post.comments}">
+                        <div>
+                            <p><b>Name : </b><strong th:text="${comment.name}"></strong></p>
+                            <p><b>Date : <strong th:text="${#temporals.format(comment.createdOn, 'dd MMMM yyyy')}"></strong></b></p>
+                            <p th:text="${comment.content}"></p>
+                            <br><br>
+                            <p>============</p>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h2>Leave a Comment :</h2>
@@ -52,7 +61,8 @@
                                             placeholder="Enter Your Comment Here" rows="8" th:field="*{content}">
                                         </textarea>
                                         <!-- Dispay Error Message Below the Field -->
-                                        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger">
+                                        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"
+                                            class="text-danger">
                                         </p>
                                     </div>
                                 </div>
