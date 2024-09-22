@@ -10,6 +10,9 @@ import com.dgmf.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
@@ -23,5 +26,14 @@ public class CommentServiceImpl implements CommentService {
         comment.setPost(post);
 
         commentRepository.save(comment);
+    }
+
+    @Override
+    public List<CommentDto> findAllComments() {
+        List<Comment> comments = commentRepository.findAll();
+
+        return comments.stream()
+                .map(CommentMapper::mapToCommentDto)
+                .collect(Collectors.toList());
     }
 }

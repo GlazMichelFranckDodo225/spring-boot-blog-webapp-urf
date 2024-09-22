@@ -1,6 +1,8 @@
 package com.dgmf.controller;
 
+import com.dgmf.dto.CommentDto;
 import com.dgmf.dto.PostDto;
+import com.dgmf.service.CommentService;
 import com.dgmf.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+    private final CommentService commentService;
 
     // Handler Method for GET All Post Request
     // Return Model (PostDtos) and View Name (posts)
@@ -24,6 +27,15 @@ public class PostController {
         model.addAttribute("posts", posts);
 
         return "admin/posts";
+    }
+
+    // Handler Method for List Comments Request
+    @GetMapping("/admin/posts/comments")
+    public String postComments(Model model) {
+        List<CommentDto> comments = commentService.findAllComments();
+        model.addAttribute("comments", comments);
+
+        return "admin/comments";
     }
 
     // Handler Method for New Post Request
