@@ -2,6 +2,7 @@ package com.dgmf.controller;
 
 import com.dgmf.dto.RegistrationDto;
 import com.dgmf.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ public class AuthController {
 
     // Handler Method for User Registration Form Submit Request
     @PostMapping("/register/save")
-    public String register(@ModelAttribute("user") RegistrationDto user) {
+    public String register(@Valid @ModelAttribute("user") RegistrationDto user) {
         userService.saveUser(user);
 
         return "redirect:/register?success";
