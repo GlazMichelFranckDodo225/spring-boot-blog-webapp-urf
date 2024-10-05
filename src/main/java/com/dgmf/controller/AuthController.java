@@ -36,7 +36,11 @@ public class AuthController {
             )
     {
         User existingUser = userService.findByEmail(user.getEmail());
-        if(existingUser != null) {
+        if(
+                existingUser != null
+                        && existingUser.getEmail() != null
+                        && !existingUser.getEmail().isEmpty()
+        ) {
             result.rejectValue(
                     "email",
                     "There is already a User registered with that email"
