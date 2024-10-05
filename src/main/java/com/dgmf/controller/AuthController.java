@@ -1,6 +1,7 @@
 package com.dgmf.controller;
 
 import com.dgmf.dto.RegistrationDto;
+import com.dgmf.entity.User;
 import com.dgmf.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,12 +35,20 @@ public class AuthController {
             Model model
             )
     {
+        User existingUser = userService.findByEmail(user.getEmail());
+        if(existingUser != null) {
+            result.rejectValue(
+                    "email",
+                    "There is already a User registered with that email"
+            );
+        }
+
         if(result.hasErrors()) {
             model.addAttribute("user", user);
 
             return "register";
         }
-        
+
         userService.saveUser(user);
 
         return "redirect:/register?success";
